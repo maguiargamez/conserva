@@ -22,31 +22,36 @@ function showData(idProduct)
 function printAmount(product)
 {    
     return `
-        <label for="amount" class="form-label">Monto que necesitas</label>
-        <input type="range" class="form-range" min="${ product.min_amount }" max="${product.max_amount}" step="${product.step_amount}" id="amount" value="${ product.default_amount }">
+        <div class="mb-3">
+            <label for="amount" class="form-label">Monto que necesitas</label>
+            <input type="range" class="form-range" min="${ product.min_amount }" max="${product.max_amount}" step="${product.step_amount}" id="amount" value="${ product.default_amount }">
+        </div>
     `;
 }
 
 function printTerm(product)
 {    
     return `
-        <label for="term" class="form-label">Plazos</label>
-        <input type="range" class="form-range" min="${ product.min_term }" max="${product.max_term}" step="1" id="term" value="${ product.default_term }">
+        <div class="mb-3">
+            <label for="term" class="form-label">Plazos</label>
+            <input type="range" class="form-range" min="${ product.min_term }" max="${product.max_term}" step="1" id="term" value="${ product.default_term }">
+        </div>
     `;
 }
 
 function printAllowedTermTypes(product)
 {
-    let string= "";
+    let string= `<div class="mb-3">
+                    <label for="termTypes" class="form-label">Pagos</label>
+                </div>
+                `;
     let array1 = product.allowed_term_type;
-    console.log(array1);
-    /*array1.foreach((value, index, array)=>{
-
+    for (let i= 0; i < array1.length; i++) {
         string+= `
-            <input type="radio" class="btn-check" name="termTypes" id="${ value._id }" autocomplete="off"></input>
-            <label class="btn btn-primary" for="${ value._id }">${ value.value }</label>
+            <input type="radio" class="btn-check" name="termTypes" id="${ array1[i]._id }" autocomplete="off"></input>
+            <label class="btn btn-primary" for="${ array1[i]._id }">${ array1[i].value }</label>
         `;
-    });*/
+    }
     return string;
 }
 
@@ -54,7 +59,6 @@ function calculate()
 {
     let amount = document.getElementById("amount");
     let term = document.getElementById("term");
-
     //alert(amount.value);
     console.log([amount.value, term.value]);
 }

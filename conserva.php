@@ -110,25 +110,28 @@
                 <label for='exampleFormControlInput1' class='form-label'>¿Cual crédito te interesa?</label>
             </div>
         ";
+        $string.=  "<div class='mb-3'>";
         foreach($products as $key => $product){            
-            $string.= "
+            $string.= "            
                 <input onchange='showData(\"".$key."\")' type='radio' class='btn-check' name='options' id='".$product["_id"]."' autocomplete='off'>
                 <label class='btn btn-primary' for='".$product["_id"]."'>".$product["product_name"]."</label>
-                ";
+            ";
         }
-        //$string.='</div>';
+        $string.='</div>';
         return $string;
     }
 
     function printDefaultData()
     {
-        $string= '<div id="data">aa</div>';
+        $string= '<div id="data" class="mb-3">aa</div>';
         return $string;
     }
 
     function printButtonCalculate()
     {
-        $string= '<button onClick="calculate()" type="button" class="btn btn-primary">Calcular</button>';
+        $string= '<div class="mb-3">
+            <button onClick="calculate()" type="button" class="btn btn-primary">Calcular</button>
+        </div>';
         return $string;
     }
 
