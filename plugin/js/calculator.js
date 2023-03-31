@@ -21,10 +21,14 @@ function showData(idProduct)
 
 function printAmount(product)
 {    
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'MXN',
+      });
     return `
         <div class="mb-3">
-            <label for="amount" class="form-label">Monto que necesitas</label>
-            <input type="range" class="form-range" min="${ product.min_amount }" max="${product.max_amount}" step="${product.step_amount}" id="amount" value="${ product.default_amount }">
+            <label for="amount" class="form-label">Monto que necesitas: $ <span id="lblAmount">${ formatter.format(product.default_amount) }</span></label>
+            <input type="range" onChange="document.getElementById('lblAmount').innerHTML = formatter.format(this.value)" class="form-range" min="${ product.min_amount }" max="${product.max_amount}" step="${product.step_amount}" id="amount" value="${ product.default_amount }">
         </div>
     `;
 }
@@ -33,8 +37,8 @@ function printTerm(product)
 {    
     return `
         <div class="mb-3">
-            <label for="term" class="form-label">Plazos</label>
-            <input type="range" class="form-range" min="${ product.min_term }" max="${product.max_term}" step="1" id="term" value="${ product.default_term }">
+            <label for="term" class="form-label">Plazos: <span id="lblTerm">${ product.default_term }</span> semanas</label>
+            <input type="range" onChange="document.getElementById('lblTerm').innerHTML = this.value" class="form-range" min="${ product.min_term }" max="${product.max_term}" step="1" id="term" value="${ product.default_term }">
         </div>
     `;
 }
